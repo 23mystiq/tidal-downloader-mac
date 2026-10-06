@@ -1,194 +1,67 @@
-# 🔰 TIDAL Downloader Next Generation! (tidal-dl-ng)
+# TIDAL Downloader for macOS
 
-[![Release](https://img.shields.io/github/v/release/exislow/tidal-dl-ng)](https://img.shields.io/github/v/release/exislow/tidal-dl-ng)
-[![Build status](https://img.shields.io/github/actions/workflow/status/exislow/tidal-dl-ng/on-release-master.yml)](https://github.com/exislow/tidal-dl-ng/actions/workflows/on-release-master.yml)
-[![Commit activity](https://img.shields.io/github/commit-activity/m/exislow/tidal-dl-ng)](https://img.shields.io/github/commit-activity/m/exislow/tidal-dl-ng)
-[![License](https://img.shields.io/github/license/exislow/tidal-dl-ng)](https://img.shields.io/github/license/exislow/tidal-dl-ng)
+A native macOS app for downloading music and videos from TIDAL, up to Hi-Res Lossless FLAC (24-bit, 192 kHz). Built with Swift and AppKit for macOS 26 Tahoe, in Apple's Liquid Glass design.
 
-> [!NOTE]
-> **This fork adds a native macOS app and fixes search.**
-> - **TIDAL Downloader for macOS:** a Swift/AppKit front end with the macOS 26 Liquid Glass design, a browser sign-in that gets lossless FLAC, streaming search results and faster playlist loading. Build instructions are in [`macos/README.md`](macos/README.md).
-> - **Search works again.** TIDAL now repeats its "top hit" on every results page, which crashed search. Fixed in `tidal_dl_ng/helper/tidal.py`.
->
-> The original repository (`exislow/tidal-dl-ng`) is no longer available, so links to it below may be broken.
+The downloading engine is [tidal-dl-ng](https://pypi.org/project/tidal-dl-ng/) by **Robert Honz ([exislow](https://github.com/exislow))**. This project adds a new macOS interface on top of it, along with a few engine fixes. See [Credits](#credits).
 
-This tool allows to download songs and videos from TIDAL. Multithreaded and multi-chunked downloads are supported.
+**You need a paid TIDAL plan.**
 
-⚠️ **Windows** Defender / **Anti Virus** software / web browser alerts, while you try to download the app binary: This is a **false positive**. Please read [this issue](https://github.com/exislow/tidal-dl-ng/issues/231), [PyInstaller (used by this project) statement ](https://github.com/pyinstaller/pyinstaller/blob/develop/.github/ISSUE_TEMPLATE/antivirus.md) and [the alternative installation solution](https://github.com/exislow/tidal-dl-ng/?tab=readme-ov-file#-installation--upgrade). ⚠️
+## Features
 
-**A paid TIDAL plan is required!** Audio quality varies up to HiRes Lossless / TIDAL MAX 24-bit, 192 kHz depending on the song available. You can use the command line or GUI version of this tool.
+- **Search** for artists, albums, tracks, videos and playlists, or paste a TIDAL link. Results appear as they arrive.
+- **Browse your library:** your playlists, mixes and favorites are in the sidebar, with artwork.
+- **Expand anything:** open an album, artist, playlist or mix right in the results to see what's inside.
+- **Filter and sort** every column. Filters accept regular expressions.
+- **Download queue** with pause and resume, live progress, and cover art for whatever you select.
+- **Lossless sign-in:** sign in through TIDAL's own login page, inside the app, to get FLAC instead of AAC.
+- **All the tidal-dl-ng options:** file naming templates, lyrics, embedded covers, playlist files, FFmpeg FLAC extraction and video conversion.
+- **Feels like a Mac app:** glass sidebar and inspector, unified toolbar, keyboard shortcuts (⌘F search, ⌘D download, ⌘R reload, ⌘, settings), dark mode.
 
-![App Image](assets/app.png)
+## Install
 
-```bash
-$ tidal-dl-ng --help
+Requirements: macOS 26 or later, Xcode 26 Command Line Tools, Python 3.12, and [FFmpeg](https://ffmpeg.org) for FLAC extraction.
 
- Usage: tidal-dl-ng [OPTIONS] COMMAND [ARGS]...
-
-╭─ Options ────────────────────────────────────────────────────────────────────╮
-│ --version  -v                                                                │
-│ --help     -h        Show this message and exit.                             │
-╰──────────────────────────────────────────────────────────────────────────────╯
-╭─ Commands ───────────────────────────────────────────────────────────────────╮
-│ cfg    Print or set an option. If no arguments are given, all options will   │
-│        be listed. If only one argument is given, the value will be printed   │
-│        for this option. To set a value for an option simply pass the value   │
-│        as the second argument                                                │
-│ dl                                                                           │
-│ dl_fav Download from a favorites collection.                                 │
-│ gui                                                                          │
-│ login                                                                        │
-│ logout                                                                       │
-╰──────────────────────────────────────────────────────────────────────────────╯
+```sh
+git clone https://github.com/23mystiq/tidal-downloader-mac.git
+cd tidal-downloader-mac
+python3.12 -m venv .venv
+.venv/bin/pip install -e .
+macos/build.sh --install
 ```
 
-If you like this projects and want to support it, feel free to buy me a coffee 🙃✌️
+This copies **TIDAL Downloader** into Applications. The app runs the engine from the folder you cloned, so keep that folder where it is.
 
-<a href="https://www.buymeacoffee.com/exislow" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/arial-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
-<a href="https://ko-fi.com/exislow" target="_blank" rel="noopener noreferrer"><img src="https://help.ko-fi.com/hc/article_attachments/11833788361117" alt="61e11d430afb112ea33c3aa5_Button-1-p-500"></a>
+## Lossless audio
 
-## 💻 Installation / Upgrade
+TIDAL now gives AAC 320 kbps instead of FLAC to the "device link" login that tidal-dl-ng uses ([details](https://github.com/EbbLabs/python-tidal/issues/404)). To download FLAC, choose **TIDAL Downloader → Sign In with Browser for Lossless…**. Most FLAC streams come packed in MP4, so keep **Settings → General → Extract FLAC** on and FFmpeg installed.
 
-**Requirements**: Python == 3.12 (other versions might work but are not tested!)
-
-```bash
-pip install --upgrade tidal-dl-ng
-# If you like to have the GUI as well use this command instead
-pip install --upgrade tidal-dl-ng[gui]
-```
-
-## ⌨️ Usage
-
-You can use the command line (CLI) version to download media by URL:
-
-```bash
-tidal-dl-ng dl https://tidal.com/browse/track/46755209
-# OR
-tdn dl https://tidal.com/browse/track/46755209
-```
-
-Or by your favorites collections:
-
-```bash
-tidal-dl-ng dl_fav tracks
-tidal-dl-ng dl_fav artists
-tidal-dl-ng dl_fav albums
-tidal-dl-ng dl_fav videos
-```
-
-You can also use the GUI:
-
-```bash
-tidal-dl-ng-gui
-# OR
-tdng
-# OR
-tidal-dl-ng gui
-```
-
-If you like to have the GUI version only as a binary, have a look at the
-[release page](https://github.com/exislow/tidal-dl-ng/releases) and download the correct version for your platform.
-
-## 🧁 Features
-
-- Download tracks, videos, albums, playlists, your favorites etc.
-- Multithreaded and multi-chunked downloads
-- Metadata for songs
-- Adjustable audio and video download quality.
-- FLAC extraction from MP4 containers
-- Lyrics and album art / cover download
-- Creates playlist files
-- Can symlink tracks instead of having several copies, if added to different playlist
-
-## ▶️ Getting started with development
-
-### 🚰 Install dependencies
-
-Clone this repository and install the dependencies:
-
-```bash
-poetry install --all-extras --with dev,docs
-```
-
-The main entry points are:
-
-```bash
-tidal_ng_dl/cli.py
-tidal_ng_dl/gui.py
-```
-
-### 📺 GUI Builder
-
-The GUI is build with `PySide6` using the [Qt Designer](https://doc.qt.io/qt-6/qtdesigner-manual.html):
-
-```bash
-PYSIDE_DESIGNER_PLUGINS=tidal_dl_ng/ui pyside6-designer
-```
-
-After all changes are saved you need to translate the Qt Designer `*.ui` file into Python code, for instance:
+## How it works
 
 ```
-pyside6-uic tidal_dl_ng/ui/main.ui -o tidal_dl_ng/ui/main.py
+TIDAL Downloader.app (Swift/AppKit)  ⇄  JSON over stdin/stdout  ⇄  python -m tidal_dl_ng.bridge  →  tidal-dl-ng engine
 ```
 
-This needs to be done for each created / modified `*.ui` file accordingly.
+- `macos/` is the Swift package for the app; `macos/build.sh` turns it into an `.app` bundle.
+- `tidal_dl_ng/bridge.py` is a headless backend that runs tidal-dl-ng's search, library, queue, download and settings logic.
+- Everything else in `tidal_dl_ng/` is the tidal-dl-ng engine. Its command line tool (`tidal-dl-ng`) and Qt GUI (`tidal-dl-ng-gui`) still work too; see the [original documentation](docs/ORIGINAL_README.md).
 
-### 🏗 Build the project
+## Changes to the engine
 
-To build the project use this command:
+- **Search fixed:** TIDAL now repeats its "top hit" on every page of search results, which crashed tidal-dl-ng's search.
+- **Lossless (PKCE) login:** tokens remember how they were obtained, so they refresh correctly.
+- **Startup fixed:** the `tidal-dl-ng` and `tidal-dl-ng-gui` commands no longer fail to start with `No module named 'config'` when installed with pip.
+- **Faster playlists:** large playlist libraries load in parallel, about 5× faster, with identical results.
+- **FFmpeg fallback:** if the configured FFmpeg path doesn't exist, the usual install locations are tried.
+- **No fake updates:** a failed update check no longer reports a bogus `v0.0.0` update.
 
-```bash
-make install
-# OR
-make gui-macos
-```
+## Credits
 
-See the `Makefile` for all available build commands.
+- **Engine:** [tidal-dl-ng](https://pypi.org/project/tidal-dl-ng/) by Robert Honz ([exislow](https://github.com/exislow)) and its contributors. The full commit history is preserved in this repository. The original repository (`github.com/exislow/tidal-dl-ng`) is no longer available.
+- **TIDAL API:** [python-tidal](https://github.com/EbbLabs/python-tidal) (`tidalapi`).
+- **macOS app and the changes listed above:** [23mystiq](https://github.com/23mystiq).
 
-The CI/CD pipeline will be triggered when you open a pull request, merge to main, or when you create a new release.
+## License
 
-To finalize the set-up for publishing to PyPi or Artifactory, see [here](https://fpgmaas.github.io/cookiecutter-poetry/features/publishing/#set-up-for-pypi).
-For activating the automatic documentation with MkDocs, see [here](https://fpgmaas.github.io/cookiecutter-poetry/features/mkdocs/#enabling-the-documentation-on-github).
-To enable the code coverage reports, see [here](https://fpgmaas.github.io/cookiecutter-poetry/features/codecov/).
+[GNU AGPL-3.0](LICENSE), the same license as tidal-dl-ng. You can use, change and share this project, but versions you distribute must stay open source under the same license.
 
-## ❓ FAQ
-
-### macOS Error Message: File/App is damaged and cannot be opened. You should move it to Trash..
-
-If you download an (unsigned) app from any source other than those that Apple seems suited, the application gets an extended attribute "com.apple.Quarantine". This triggers the message: "<application> is damaged and can't be opened. You should move it to the Bin."
-
-Remove the attribute and you can launch the application. [Source 1](https://discussions.apple.com/thread/253714860?sortBy=rank) [Source 2](https://www.reddit.com/r/macsysadmin/comments/13vu7f3/app_is_damaged_and_cant_be_opened_error_on_ventura/)
-
-```
-$ sudo xattr -dr com.apple.quarantine /Applications/TIDAL-Downloader-NG.app/
-```
-
-Why is this app unsigned? Only developer enrolled in the paid Apple developer program are allowed to sign (legal) apps. Without this subscription app signing is not possible.
-
-Gatekeeper really annoys you, and you like to disable it completely? Follow this [link](https://iboysoft.com/tips/how-to-disable-gatekeeper-macos-sequoia.html)
-
-### My (Windows) antivirus app XYZ says the GUI version of this app is harmful.
-
-Short answer: It is a lie. Get rid of your antivirus app.
-
-Long answer: See [here](https://github.com/exislow/tidal-dl-ng/issues/231)
-
-### I get an error when `extract_flac` is enabled.
-
-Your `path_binary_ffmpeg` is probably wrong. Please read over and over again the help of this particular option until you get it right what path to put for `path_binary_ffmpeg`.
-
-## ‼️ Disclaimer
-
-- For educational purposes only. I am not liable and responsible for any damage that happens.
-- You should not use this method to distribute or pirate music.
-- It may be illegal to use this app in your country.
-
-## 🫂 Contributors
-
-Thanks to all, who have contributed to this project!
-
-This project is based on:
-
-- https://fpgmaas.github.io/cookiecutter-poetry/
-
-<a href="https://github.com/exislow/tidal-dl-ng/graphs/contributors"><img src="https://contributors-img.web.app/image?repo=exislow/tidal-dl-ng" /></a>
+This project is not affiliated with TIDAL. Use it only for music you're entitled to download under your TIDAL subscription and local law.
