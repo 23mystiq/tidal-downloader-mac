@@ -5,6 +5,13 @@
 [![Commit activity](https://img.shields.io/github/commit-activity/m/exislow/tidal-dl-ng)](https://img.shields.io/github/commit-activity/m/exislow/tidal-dl-ng)
 [![License](https://img.shields.io/github/license/exislow/tidal-dl-ng)](https://img.shields.io/github/license/exislow/tidal-dl-ng)
 
+> [!NOTE]
+> **This fork adds a native macOS app and fixes search.**
+> - **TIDAL Downloader for macOS:** a Swift/AppKit front end with the macOS 26 Liquid Glass design, a browser sign-in that gets lossless FLAC, streaming search results and faster playlist loading. Build instructions are in [`macos/README.md`](macos/README.md).
+> - **Search works again.** TIDAL now repeats its "top hit" on every results page, which crashed search. Fixed in `tidal_dl_ng/helper/tidal.py`.
+>
+> The original repository (`exislow/tidal-dl-ng`) is no longer available, so links to it below may be broken.
+
 This tool allows to download songs and videos from TIDAL. Multithreaded and multi-chunked downloads are supported.
 
 ⚠️ **Windows** Defender / **Anti Virus** software / web browser alerts, while you try to download the app binary: This is a **false positive**. Please read [this issue](https://github.com/exislow/tidal-dl-ng/issues/231), [PyInstaller (used by this project) statement ](https://github.com/pyinstaller/pyinstaller/blob/develop/.github/ISSUE_TEMPLATE/antivirus.md) and [the alternative installation solution](https://github.com/exislow/tidal-dl-ng/?tab=readme-ov-file#-installation--upgrade). ⚠️
