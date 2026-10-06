@@ -2,6 +2,10 @@
 
 A native macOS app for downloading music and videos from TIDAL, up to Hi-Res Lossless FLAC (24-bit, 192 kHz). Built with Swift and AppKit for macOS 26 Tahoe, in Apple's Liquid Glass design.
 
+<p align="center">
+  <img src="assets/macos-app.png" alt="TIDAL Downloader for macOS: playlists in the sidebar, a playlist's tracks with artwork in the main table, cover art and the download queue on the right, and download progress at the bottom" width="900">
+</p>
+
 The downloading engine is [tidal-dl-ng](https://pypi.org/project/tidal-dl-ng/) by **Robert Honz ([exislow](https://github.com/exislow))**. This project adds a new macOS interface on top of it, along with a few engine fixes. See [Credits](#credits).
 
 **You need a paid TIDAL plan.**
