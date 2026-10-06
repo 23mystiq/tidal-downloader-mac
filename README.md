@@ -10,6 +10,10 @@ The downloading engine is [tidal-dl-ng](https://pypi.org/project/tidal-dl-ng/) b
 
 **You need a paid TIDAL plan.**
 
+If you like the app and want to support it, feel free to buy me a coffee ☕️
+
+<a href="https://buymeacoffee.com/23mystiq" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50"></a>
+
 ## Features
 
 - **Search** for artists, albums, tracks, videos and playlists, or paste a TIDAL link. Results appear as they arrive.
