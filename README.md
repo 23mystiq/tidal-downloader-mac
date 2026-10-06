@@ -56,7 +56,7 @@ TIDAL Downloader.app (Swift/AppKit)  ⇄  JSON over stdin/stdout  ⇄  python -m
 
 ## Credits
 
-- **Engine:** [tidal-dl-ng](https://pypi.org/project/tidal-dl-ng/) by Robert Honz ([exislow](https://github.com/exislow)) and its contributors. The full commit history is preserved in this repository. The original repository (`github.com/exislow/tidal-dl-ng`) is no longer available.
+- **Engine:** [tidal-dl-ng](https://pypi.org/project/tidal-dl-ng/) by Robert Honz ([exislow](https://github.com/exislow)) and its contributors. The full commit history is preserved in this repository. The original repository (`github.com/exislow/tidal-dl-ng`) is no longer available. To support the engine's author, use [Buy Me a Coffee](https://www.buymeacoffee.com/exislow) or [Ko-fi](https://ko-fi.com/exislow).
 - **TIDAL API:** [python-tidal](https://github.com/EbbLabs/python-tidal) (`tidalapi`).
 - **macOS app and the changes listed above:** [23mystiq](https://github.com/23mystiq).
 
