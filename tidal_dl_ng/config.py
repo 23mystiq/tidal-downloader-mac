@@ -118,7 +118,7 @@ class Tidal(BaseConfig, metaclass=SingletonMeta):
 
     def login_token(self, do_pkce: bool = False) -> bool:
         result = False
-        self.is_pkce = do_pkce
+        self.is_pkce = do_pkce or bool(getattr(self.data, "is_pkce", False))
 
         if self.token_from_storage:
             try:
@@ -127,7 +127,7 @@ class Tidal(BaseConfig, metaclass=SingletonMeta):
                     self.data.access_token,
                     self.data.refresh_token,
                     self.data.expiry_time,
-                    is_pkce=do_pkce,
+                    is_pkce=self.is_pkce,
                 )
             except (HTTPError, JSONDecodeError):
                 result = False
@@ -155,6 +155,7 @@ class Tidal(BaseConfig, metaclass=SingletonMeta):
         self.set_option("access_token", self.session.access_token)
         self.set_option("refresh_token", self.session.refresh_token)
         self.set_option("expiry_time", self.session.expiry_time)
+        self.data.is_pkce = bool(self.session.is_pkce)
         self.save()
 
     def login(self, fn_print: Callable) -> bool:

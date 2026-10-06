@@ -108,3 +108,5 @@ class Token:
     access_token: str | None = None
     refresh_token: str | None = None
     expiry_time: float = 0.0
+    # Tokens from the PKCE login must be refreshed with the PKCE client id.
+    is_pkce: bool = False
